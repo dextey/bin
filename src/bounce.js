@@ -1,11 +1,22 @@
-const canvas = document.getElementById("bounce");
+const canvas = document.getElementById("particle");
+let WIDTH, HEIGHT;
 
-const WIDTH = window.innerWidth - 16;
-const HEIGHT = window.innerHeight - 16;
+WIDTH = window.innerWidth;
+HEIGHT = window.innerHeight;
 
-canvas.width = WIDTH;
-canvas.height = HEIGHT;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener("resize", () => {
+  WIDTH = window.innerWidth;
+  HEIGHT = window.innerHeight;
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+});
+
 const ctx = canvas.getContext("2d");
+
+const colors = ["#FF6969", "#C70039", "#141E46", "#FAEF5D"];
 
 class Circle {
   constructor(x, y, dx, dy, radius) {
@@ -14,14 +25,13 @@ class Circle {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
   }
 
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = `rgb(${255 - 23.5 - ((Math.random() + 0.5) * 2) / y},${
-      255 - 23.5 - ((Math.random() - 0.5) * 20) / x
-    },0)`;
+    ctx.fillStyle = this.color;
     ctx.fill();
     ctx.lineWidth = 3;
   }
@@ -40,7 +50,7 @@ const circles = [];
 
 const speed = 5;
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 20; i++) {
   x = Math.random() * (WIDTH - 100) + 40;
   y = Math.random() * (HEIGHT - 100) + 40;
   dx = (Math.random() - 0.5) * speed;
@@ -51,7 +61,7 @@ for (let i = 0; i < 10; i++) {
 
 function draw() {
   window.requestAnimationFrame(draw);
-  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
   for (let i = 0; i < circles.length; i++) {
     circles[i].update();

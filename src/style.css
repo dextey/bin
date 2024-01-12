@@ -1,8 +1,8 @@
 body {
   overflow: hidden;
-  /* padding: 1rem; */
+  margin: 0;
 }
 
 #bounce {
-  background: #000;
+  background: #fff5e0;
 }
