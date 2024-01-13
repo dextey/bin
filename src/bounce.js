@@ -1,4 +1,4 @@
-const canvas = document.getElementById("particle");
+const canvas = document.getElementById("bounce");
 let WIDTH, HEIGHT;
 
 WIDTH = window.innerWidth;
